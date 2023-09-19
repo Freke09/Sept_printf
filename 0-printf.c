@@ -1,5 +1,8 @@
 #include "main.h"
 
+int print_char(int k);
+int print_str(char *str);
+
 /**
 * _printf - a function that produces output according to format
 * @format: character string
@@ -9,8 +12,6 @@
 * Return: the total number of characters printed
 */
 
-int print_char(int k);
-int print_str(char *str);
 
 int _printf(const char *format, ...)
 {
@@ -57,21 +58,21 @@ int _printf(const char *format, ...)
 }
 
 /**
-* print_char - a function to print a character
+* print_char - function to print character
 * @k: the character to be printed
-* Return: The number of characters printed)
+* Return: the numbers of characters to be printed
 */
 
-int print_char (int k)
+int print_char(int k)
 {
 	write(1, &k, 1);
 	return (1);
 }
 
 /**
-* print_str - a function to print a string
-* @str: the string to be printed
-* Return: the length of the string
+* print_str - A function to print a string
+* @str: The string to be printed
+* Return: The length of the string
 */
 
 int print_str(char *str)
