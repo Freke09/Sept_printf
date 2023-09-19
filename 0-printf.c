@@ -19,7 +19,7 @@ int _printf(const char *format, ...)
 
 	if (format == NULL) /* This handles the null string and prints nothing */
 	{
-		return (-1);
+		return (0);
 	}
 
 	va_start(elements, format);
