@@ -1,7 +1,6 @@
 #include "main.h"
 
-int print_char(int k);
-int print_str(char *str);
+int cs_handler(char format, va_list elements, int items);
 
 /**
 * _printf - a function that produces output according to format
@@ -36,20 +35,7 @@ int _printf(const char *format, ...)
 			format++; /* Move to the next character */
 			if (*format == '\0') /* if the format string ends with % stop */
 				break;
-			if (*format == '%') /* this handles %% */
-			{
-				write(1, format, 1); /* Prints the second % */
-
-				items++;
-			}
-			else if (*format == 'c') /* if format is %c print a character */
-			{
-				items += print_char(va_arg(elements, int));
-			}
-			else if (*format == 's') /* if it is %s print a string */
-			{
-				items += print_str(va_arg(elements, char *));
-			}
+			cs_handler(*format, elements, items);
 		}
 		format++;
 	}
@@ -58,33 +44,35 @@ int _printf(const char *format, ...)
 }
 
 /**
-* print_char - function to print character
-* @k: the character to be printed
-* Return: the numbers of characters to be printed
-*/
+ *cs_handler - handles c and s
+ *@format: specifier
+ *@elements: variable argument
+ *@items: number of character printed
+ *
+ */
 
-int print_char(int k)
+int cs_handler(char format, va_list elements, int items)
 {
-	write(1, &k, 1);
-	return (1);
+if (format == 'c')
+{
+char c = va_arg(elements, int);
+write(1, &c, 1);
+items++;
 }
-
-/**
-* print_str - A function to print a string
-* @str: The string to be printed
-* Return: The length of the string
-*/
-
-int print_str(char *str)
+else if (format == 's')
 {
-	int length = 0;
-
-	while (str[length] != '\0')
-	{
-		length++;
-	}
-
-	write(1, str, length);
-
-	return (length);
+char *str = va_arg(elements, char*);
+while (*str)
+{
+write(1, str, 1);
+str++;
+items++;
+}
+}
+else if (format  == '%')
+{
+write(1, &format, 1);
+items++;
+}
+return (items);
 }
