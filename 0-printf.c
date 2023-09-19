@@ -50,6 +50,10 @@ int _printf(const char *format, ...)
 			{
 				items += print_str(va_arg(elements, char *));
 			}
+			else if (*format == 'd' || *format == 'i') /* if it is %s print a string */
+			{
+				items += int_handler(va_arg(elements, int));
+			}
 		}
 		format++;
 	}
