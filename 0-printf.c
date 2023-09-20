@@ -38,7 +38,7 @@ int _printf(const char *format, ...)
 				break;
 			if (*format == '%') /* this handles %% */
 			{
-				write(1, format, 1); /* Prints the second % */
+				write(1, "%", 1); /* Prints the second % */
 
 				items++;
 			}
